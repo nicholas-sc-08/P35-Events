@@ -40,6 +40,14 @@ public class Event {
 
     @Column(name = "end_time")
     private LocalTime endTime;
+
+    public Integer getEventId() {
+        return eventId;
+    };
+
+    public void setEventId(Integer eventId) {
+        this.eventId = eventId;
+    };
     
     public String getTitle() {
         return title;
