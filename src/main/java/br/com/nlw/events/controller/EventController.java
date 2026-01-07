@@ -1,16 +1,17 @@
 package br.com.nlw.events.controller;
 
-import org.springframework.http.ResponseEntity;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.GetMapping;
-import br.com.nlw.events.service.EventService;
-import br.com.nlw.events.model.Event;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import br.com.nlw.events.model.Event;
+import br.com.nlw.events.service.EventService;
 
 @RestController
 public class EventController {
@@ -29,7 +30,7 @@ public class EventController {
 
         if(event != null){
             return ResponseEntity.status(200).body(event);
-        };
+        }
 
         return ResponseEntity.status(404).build();
     };
