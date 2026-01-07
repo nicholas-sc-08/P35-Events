@@ -60,7 +60,13 @@
 			<artifactId>spring-boot-starter-webmvc-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
+	
+   <dependency>
+     <groupId>net.caladesiframework</groupId>
+     <artifactId>caladesi-repository_2.10</artifactId>
+     <version>0.6.2</version>
+   </dependency>
+ </dependencies>
 
 	<build>
 		<plugins>

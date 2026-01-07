@@ -12,8 +12,9 @@ import jakarta.persistence.Table;
 
 @Entity @Table(name = "tbl_event")
 public class Event {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
     
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "event_id")
+    @Column(name = "event_id")
     private Integer eventId;
     
     @Column(name = "title", length = 255, nullable = false)
