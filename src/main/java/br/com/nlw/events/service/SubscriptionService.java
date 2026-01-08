@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.nlw.events.controller.exception.EventNotFoundException;
+import br.com.nlw.events.controller.exception.SubscriptionConflictException;
 import br.com.nlw.events.model.Event;
 import br.com.nlw.events.model.Subscription;
 import br.com.nlw.events.model.User;
@@ -38,6 +39,11 @@ public class SubscriptionService {
         subs.setEvent(event);
         subs.setSubscriber(existingUser);
 
+        Subscription tmpSub = subscriptionRepo.findByEventAndSubscriber(event, existingUser);
+        if(tmpSub != null) {
+            throw new SubscriptionConflictException("Already exists subscription to user "+existingUser.getName()+" to the event "+event.getTitle());
+        }
+        
         Subscription res = subscriptionRepo.save(subs);
         return res;
     }
