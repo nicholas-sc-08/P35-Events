@@ -29,10 +29,10 @@ public class EventController {
         Event event = service.getByPrettyName(prettyName);
 
         if(event != null){
-            return ResponseEntity.status(200).body(event);
+            return ResponseEntity.ok().body(event);
         }
 
-        return ResponseEntity.status(404).build();
+        return ResponseEntity.notFound().build();
     };
 
     @PostMapping("/events")
