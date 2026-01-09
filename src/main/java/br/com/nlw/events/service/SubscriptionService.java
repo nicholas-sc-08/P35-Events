@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 
 import br.com.nlw.events.controller.exception.EventNotFoundException;
 import br.com.nlw.events.controller.exception.SubscriptionConflictException;
+import br.com.nlw.events.controller.exception.UserIndicatorNotFoundException;
+import br.com.nlw.events.dto.SubscriptionResponse;
 import br.com.nlw.events.model.Event;
 import br.com.nlw.events.model.Subscription;
 import br.com.nlw.events.model.User;
@@ -25,7 +27,7 @@ public class SubscriptionService {
     private SubscriptionRepo subscriptionRepo;
 
     
-    public Subscription createNewSubscription(String eventName, User user) {
+    public SubscriptionResponse createNewSubscription(String eventName, User user, Integer userId) {
         
         Event event = eventRepo.findByPrettyName(eventName);
         if(event == null) {
@@ -35,9 +37,16 @@ public class SubscriptionService {
         if(existingUser == null) {
             existingUser = userRepo.save(user);
         }
+
+        User indicator = userRepo.findById(userId).orElse(null);
+        if(indicator == null) {
+            throw new UserIndicatorNotFoundException("User "+userId+" indicator don't exist!");
+        }
+
         Subscription subs = new Subscription();
         subs.setEvent(event);
         subs.setSubscriber(existingUser);
+        subs.setIndication(indicator);
 
         Subscription tmpSub = subscriptionRepo.findByEventAndSubscriber(event, existingUser);
         if(tmpSub != null) {
@@ -45,6 +54,6 @@ public class SubscriptionService {
         }
         
         Subscription res = subscriptionRepo.save(subs);
-        return res;
+        return new SubscriptionResponse(res.getSubscriptionNumber(), "http://codecraft.com/subscription/"+res.getEvent().getPrettyName()+"/"+res.getSubscriber().getId());
     }
 }
