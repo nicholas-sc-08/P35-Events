@@ -1,4 +1,4 @@
-# 🎉 P35-Events
+# 🎉 Event SpringBoot application
 
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=black) ![Spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white) ![SpringBoot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white) ![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
 
@@ -6,7 +6,7 @@ This is a repository with contains a back-end project with those tecnologies: Ja
 
 ## 🧮 Routes
 
-| Method | Route | Description |
+| Method | Requisition Path | Description |
 |--------|-------|-------------|
 | **GET** | ```/events``` | This method with this route return all the events on the system |
 | **GET** | ```/events/{prettyName}``` | Here it returns a specific event by receiving a prettyName of the vent |
@@ -34,30 +34,30 @@ Change the url of ```datasource.url``` on to your database configurations.
 After that, create the tables inside of your database:
 
 ```sql
-    create table tbl_user (
-	user_id	int	primary key,
-    user_name	varchar(255),
-    user_email	varchar(255)
-    );
+create table tbl_user (
+user_id	int	primary key,
+user_name	varchar(255),
+user_email	varchar(255)
+);
 
-    create table tbl_subscription(
-	subscription_number	int	primary key,
-    subscribed_user_id	int,
-    indication_user_id int,
-    event_id	int
-    );
+create table tbl_subscription(
+subscription_number int	primary key,
+subscribed_user_id	int,
+indication_user_id int,
+event_id    int
+);
 
-    create table	tbl_event(
-	event_id	int	auto_increment primary key,
-    title	varchar(255),
-    pretty_name	varchar(50),
-    location	varchar(255),
-    price	double,
-    start_date	date,
-    end_date	date,
-    start_time	time,
-    end_time	time
-    );
+create table tbl_event(
+event_id	int	auto_increment primary key,
+title	varchar(255),
+pretty_name	varchar(50),
+location	varchar(255),
+price	double,
+start_date	date,
+end_date	date,
+start_time	time,
+end_time	time
+);
 ```
 
 # 💻 Running Project
